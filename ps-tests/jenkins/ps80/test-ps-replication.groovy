@@ -103,7 +103,7 @@ pipeline {
                   mv binary.tar.gz ${PS_TARBALL}
                 fi
                 cd -
-                git clone -b test-repo https://github.com/kaushikpuneet07/percona-qa.git --depth 1
+                git clone -b test-rep https://github.com/kaushikpuneet07/percona-qa.git --depth 1
                 ${WORKSPACE}/percona-qa/ps-async-repl-test.sh --workdir=${WORKSPACE}/${TEST_DIR} --build-number=${BUILD_NUMBER} --testcase=${TEST_CASE} --storage-engine=innodb
                 '''
               }
