@@ -1051,6 +1051,10 @@ function async_rpl_test(){
       gt_test_run mtr_db_ps2_1 "/tmp/ps2.sock"
     fi
 
+    echoit "Checking slave sync status"
+    slave_sync_check "/tmp/ps2.sock" "$WORKDIR/logs/slave_status_psnode2.log" "$WORKDIR/logs/psnode2.err"
+    slave_sync_check "/tmp/ps1.sock" "$WORKDIR/logs/slave_status_psnode1.log" "$WORKDIR/logs/psnode1.err"
+
     sleep 10
     local SB_PS_1=`$PS_BASEDIR/bin/mysql -uroot --socket=/tmp/ps2.sock -Bse "show slave status\G" | grep Seconds_Behind_Master | awk '{ print $2 }'`
     local SB_PS_2=`$PS_BASEDIR/bin/mysql -uroot --socket=/tmp/ps1.sock -Bse "show slave status\G" | grep Seconds_Behind_Master | awk '{ print $2 }'`
